@@ -5,3 +5,7 @@
 .search-button:hover {
   background-color: #84b5da;
 }
+
+.city-search {
+  margin: 0 auto;
+}

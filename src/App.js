@@ -5,7 +5,7 @@ export default function App() {
     <div className="App">
       <section className="vh-100" style={{ backgroundColor: "#f5f6f7" }}>
         <div className="container py-5 h-100">
-          <div class="input-group mb-3">
+          <div className="city-search input-group mb-4 w-50">
             <input
               type="search"
               className="form-control"
@@ -17,7 +17,7 @@ export default function App() {
               value="Search"
             ></input>
           </div>
-          <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="row d-flex justify-content-center align-items-center">
             <div className="col-md-10 col-lg-8 col-xl-6">
               <div
                 className="card text-white"
@@ -41,10 +41,23 @@ export default function App() {
                 <div className="card-img-overlay text-dark p-5">
                   <h4 className="mb-0">Juneau, Alaska, US</h4>
                   <p className="display-2 my-3">1.28°C</p>
-                  <p className="mb-2">
-                    Feels Like: <strong>-1.08 °C</strong>
-                  </p>
-                  <h5>Snowy</h5>
+                  <div className="row">
+                    <div className="col">
+                      <p className="mb-2">
+                        Feels Like: <strong>-1.08 °C</strong>
+                      </p>
+                      <h5>Snowy</h5>
+                    </div>
+                    <div className="col">
+                      {" "}
+                      <p className="mb-1">
+                        Humidity: <strong>93%</strong>
+                      </p>
+                      <p>
+                        Wind: <strong>2.06 km/h</strong>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
