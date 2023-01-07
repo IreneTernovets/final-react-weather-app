@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Weather() {
-  function handleResponse(response) {
-    setReady(true);
-  }
+export default function Weather(props) {
   const [ready, setReady] = useState(false);
+  const [weatherData, setWeatherData] = useState({});
+
+  function handleResponse(response) {
+    console.log(response);
+    setReady(true);
+    setWeatherData({
+      city: response.data.city,
+      country: response.data.country,
+      temperature: Math.round(response.data.temperature.current),
+      feelsLike: Math.round(response.data.temperature.feels_like),
+      clouds: response.data.condition.description,
+      humidity: response.data.temperature.humidity,
+      wind: response.data.wind.speed,
+    });
+  }
 
   if (ready) {
     return (
@@ -46,22 +58,29 @@ export default function Weather() {
                     ></div>
                   </div>
                   <div className="card-img-overlay text-dark p-5">
-                    <h4 className="mb-0">Juneau, Alaska, US</h4>
-                    <p className="display-2 my-3">1.28°C</p>
+                    <h4 className="mb-0">
+                      {weatherData.city}, {weatherData.country}
+                    </h4>
+
+                    <p className="display-2 my-3 ">
+                      {weatherData.temperature}°C
+                    </p>
+
                     <div className="row">
                       <div className="col">
                         <p className="mb-2">
-                          Feels Like: <strong>-1.08 °C</strong>
+                          Feels Like:{" "}
+                          <strong>{weatherData.feelsLike} °C</strong>
                         </p>
-                        <h5>Snowy</h5>
+                        <h5 className="text-uppercase">{weatherData.clouds}</h5>
                       </div>
                       <div className="col">
                         {" "}
                         <p className="mb-1">
-                          Humidity: <strong>93%</strong>
+                          Humidity: <strong>{weatherData.humidity}%</strong>
                         </p>
                         <p>
-                          Wind: <strong>2.06 km/h</strong>
+                          Wind: <strong>{weatherData.wind} km/h</strong>
                         </p>
                       </div>
                     </div>
@@ -69,13 +88,16 @@ export default function Weather() {
                 </div>
               </div>
             </div>
+            <div className="mt-3 text-center">
+              <strong>Saturday, 10:23</strong>
+            </div>
           </div>
         </section>
       </div>
     );
   } else {
     const apiKey = "ea0o7d08fbf3a9bf31at7403ea5c8b4c";
-    let query = "Juneau";
+    let query = props.defaultCity;
     const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
 
