@@ -5,6 +5,7 @@ import FormattedDate from "./FormattedDate";
 export default function Weather(props) {
   const [ready, setReady] = useState(false);
   const [weatherData, setWeatherData] = useState({});
+  const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
     setReady(true);
@@ -20,13 +21,32 @@ export default function Weather(props) {
     });
   }
 
+  function search() {
+    const apiKey = "ea0o7d08fbf3a9bf31at7403ea5c8b4c";
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
   if (ready) {
     return (
       <div className="Weather">
         <section className="vh-100" style={{ backgroundColor: "#f5f6f7" }}>
           <div className="container py-5 h-100">
-            <div className="city-search input-group mb-4 w-50">
+            <form
+              onSubmit={handleSubmit}
+              className="city-search input-group mb-4 w-50"
+            >
               <input
+                onChange={handleCityChange}
                 type="search"
                 className="form-control"
                 placeholder="Type a city"
@@ -36,7 +56,7 @@ export default function Weather(props) {
                 type="submit"
                 value="Search"
               ></input>
-            </div>
+            </form>
             <div className="row d-flex justify-content-center align-items-center">
               <div className="col-md-10 col-lg-8 col-xl-6">
                 <div
@@ -99,11 +119,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "ea0o7d08fbf3a9bf31at7403ea5c8b4c";
-    let query = props.defaultCity;
-    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-
+    search();
     return "Loading...";
   }
 }
