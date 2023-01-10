@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Weather.css";
 import FormattedDate from "./FormattedDate";
+import CurrentTemperature from "./CurrentTemperature";
 
 export default function Weather(props) {
   const [ready, setReady] = useState(false);
@@ -83,15 +85,14 @@ export default function Weather(props) {
                       {weatherData.city}, {weatherData.country}
                     </h4>
 
-                    <p className="display-2 my-3 ">
-                      {weatherData.temperature}°C
+                    <p className="display-2 my-3">
+                      <CurrentTemperature celsius={weatherData.temperature} />
                     </p>
 
                     <div className="row">
                       <div className="col">
                         <p className="mb-2">
-                          Feels Like:{" "}
-                          <strong>{weatherData.feelsLike} °C</strong>
+                          Feels Like: <strong>{weatherData.feelsLike}°C</strong>
                         </p>
                         <h5 className="text-uppercase">{weatherData.clouds}</h5>
                       </div>
