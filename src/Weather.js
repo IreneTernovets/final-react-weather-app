@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Weather.css";
 import FormattedDate from "./FormattedDate";
 import CurrentTemperature from "./CurrentTemperature";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
   const [ready, setReady] = useState(false);
@@ -42,10 +43,10 @@ export default function Weather(props) {
     return (
       <div className="Weather">
         <section className="vh-100" style={{ backgroundColor: "#f5f6f7" }}>
-          <div className="container py-5 h-100">
+          <div className="container py-4 h-100">
             <form
               onSubmit={handleSubmit}
-              className="city-search input-group mb-4 w-50"
+              className="city-search input-group mb-3 w-50"
             >
               <input
                 onChange={handleCityChange}
@@ -110,7 +111,8 @@ export default function Weather(props) {
                 </div>
               </div>
             </div>
-            <div className="mt-3 text-center">
+            <WeatherForecast />
+            <div className="mt-2 text-center">
               <strong>
                 <FormattedDate date={weatherData.date} />
               </strong>

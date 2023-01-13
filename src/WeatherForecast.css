@@ -1,0 +1,28 @@
+.WeatherForecast {
+  padding: 1em 7em;
+}
+
+.WeatherForecast .forecast-item {
+  background-color: #cfe1ef;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.WeatherForecast .forecast-day {
+  opacity: 0.9;
+}
+
+.WeatherForecast .forecast-temperature-max {
+  margin: 5px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.WeatherForecast .forecast-temperature-min {
+  font-weight: 700;
+  opacity: 0.7;
+}
