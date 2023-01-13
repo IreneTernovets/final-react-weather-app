@@ -111,7 +111,7 @@ export default function Weather(props) {
                 </div>
               </div>
             </div>
-            <WeatherForecast />
+            <WeatherForecast city={weatherData.city} />
             <div className="mt-2 text-center">
               <strong>
                 <FormattedDate date={weatherData.date} />
