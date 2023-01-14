@@ -7,7 +7,6 @@
   margin: 1em;
   display: flex;
   flex-direction: column;
-  row-gap: 1em;
   padding: 10px;
   justify-content: center;
   align-items: center;
@@ -25,4 +24,8 @@
 .WeatherForecast .forecast-temperature-min {
   font-weight: 700;
   opacity: 0.7;
+}
+
+.forecast-icon-img {
+  width: 80px;
 }
