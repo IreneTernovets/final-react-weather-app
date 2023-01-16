@@ -1,5 +1,5 @@
 import "./WeatherForecast.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import WeatherForecastDay from "./WeatherForecastDay";
 
@@ -11,52 +11,19 @@ export default function WeatherForecast(props) {
     setLoaded(true);
   }
 
+  useEffect(() => {
+    setLoaded(false);
+  }, [props.city]);
+
   if (loaded) {
     return (
       <div className="WeatherForecast container">
         <div className="row">
-          <WeatherForecastDay data={forecast[0]} />
-
-          <div className="forecast-item col">
-            <div className="forecast-day">Thu</div>
-            <div className="forecast-icon">
-              <img src="#" alt="forecast-icon" />
-            </div>
-            <div className="forecast-temperature">
-              <span className="forecast-temperature-max">19°C</span>
-              <span className="forecast-temperature-min">10°C</span>
-            </div>
-          </div>
-          <div className="forecast-item col">
-            <div className="forecast-day">Thu</div>
-            <div className="forecast-icon">
-              <img src="#" alt="forecast-icon" />
-            </div>
-            <div className="forecast-temperature">
-              <span className="forecast-temperature-max">19°C</span>
-              <span className="forecast-temperature-min">10°C</span>
-            </div>
-          </div>
-          <div className="forecast-item col">
-            <div className="forecast-day">Thu</div>
-            <div className="forecast-icon">
-              <img src="#" alt="forecast-icon" />
-            </div>
-            <div className="forecast-temperature">
-              <span className="forecast-temperature-max">19°C</span>
-              <span className="forecast-temperature-min">10°C</span>
-            </div>
-          </div>
-          <div className="forecast-item col">
-            <div className="forecast-day">Thu</div>
-            <div className="forecast-icon">
-              <img src="#" alt="forecast-icon" />
-            </div>
-            <div className="forecast-temperature">
-              <span className="forecast-temperature-max">19°C</span>
-              <span className="forecast-temperature-min">10°C</span>
-            </div>
-          </div>
+          {forecast.map(function (dailyForecast, index) {
+            if (index < 5) {
+              return <WeatherForecastDay key={index} data={dailyForecast} />;
+            }
+          })}
         </div>
       </div>
     );
