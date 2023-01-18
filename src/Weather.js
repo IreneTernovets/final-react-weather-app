@@ -4,6 +4,7 @@ import "./Weather.css";
 import FormattedDate from "./FormattedDate";
 import CurrentTemperature from "./CurrentTemperature";
 import WeatherForecast from "./WeatherForecast";
+import { MutatingDots } from "react-loader-spinner";
 
 export default function Weather(props) {
   const [ready, setReady] = useState(false);
@@ -43,7 +44,7 @@ export default function Weather(props) {
     return (
       <div className="Weather">
         <section className="vh-100" style={{ backgroundColor: "#f5f6f7" }}>
-          <div className="container py-4 h-100">
+          <div className="container py-4">
             <form
               onSubmit={handleSubmit}
               className="city-search input-group mb-3 w-50"
@@ -112,10 +113,8 @@ export default function Weather(props) {
               </div>
             </div>
             <WeatherForecast city={weatherData.city} />
-            <div className="mt-2 text-center">
-              <strong>
-                <FormattedDate date={weatherData.date} />
-              </strong>
+            <div className=" date text-center">
+              <FormattedDate date={weatherData.date} />
             </div>
           </div>
         </section>
@@ -123,6 +122,23 @@ export default function Weather(props) {
     );
   } else {
     search();
-    return "Loading...";
+    return (
+      <MutatingDots
+        height="100"
+        width="100"
+        color="#ABC9E0"
+        secondaryColor="#ABC9E0"
+        radius="12.5"
+        ariaLabel="mutating-dots-loading"
+        wrapperStyle={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+        wrapperClass="dotsStyle"
+        visible={true}
+      />
+    );
   }
 }

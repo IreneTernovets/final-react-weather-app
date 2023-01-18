@@ -4,3 +4,10 @@
   bottom: 35px;
   right: 20px;
 }
+
+.Weather .date {
+  margin: 20px 0;
+  color: #4a6076;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
